@@ -1,0 +1,30 @@
+plugins {
+  id 'org.springframework.boot' version '2.1.5.RELEASE'
+  id 'java'
+  id 'org.flywaydb.flyway' version '5.2.4'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.tamurashingo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
+
+  implementation 'org.springframework.boot:spring-boot-starter'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+flyway {
+  url = 'jdbc:mysql://localhost:3306/salonservice'
+  user = 'root'
+  password = 'password'
+}
+
+
