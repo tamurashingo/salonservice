@@ -24,29 +24,70 @@
 package com.github.tamurashingo.salonservice.infrastructure.repository;
 
 import com.github.tamurashingo.salonservice.domain.model.User;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
 public interface UserRepository {
 
-
     @Select(
-                      " select "
-                    + "   user_id, "
-                    + "   user_email, "
-                    + "   user_name, "
-                    + "   password, "
-                    + "   user_status, "
-                    + "   created_date, "
-                    + "   updated_date "
-                    + " from "
-                    + "   user "
-                    + " where "
-                    + "   email = #{email} "
+              " select "
+            + "   user_id, "
+            + "   user_email, "
+            + "   user_name, "
+            + "   password, "
+            + "   user_status #{com., "
+            + "   created_date, "
+            + "   updated_date "
+            + " from "
+            + "   user "
+            + " where "
+            + "   email = #{email} "
     )
+    @Results( id = "User", value = {
+            @Result(column = "user_id", property = "userId"),
+            @Result(column = "user_email", property = "userEmail"),
+            @Result(column = "user_name", property = "userName"),
+            @Result(column = "password", property = "password"),
+            @Result(column = "user_status", property = "userStatus", typeHandler = User.UserStatusTypeHandler.class),
+            @Result(column = "created_date", property = "createdDate"),
+            @Result(column = "updated_date", property = "updatedDate")
+    })
     public User findUserByEmail(@Param("email") String email);
+
+
+    @Insert(
+              " insert into "
+            + "   user "
+            + " ( "
+            + "   user_email, "
+            + "   user_name, "
+            + "   password, "
+            + "   user_status, "
+            + "   created_date, "
+            + "   updated_date "
+            + " ) "
+            + " values ( "
+            + "   #{userEmail}, "
+            + "   #{userName}, "
+            + "   #{password}, "
+            + "   #{user_status, typeHandler = User.UserStatusTypeHandler}, "
+            + "   #{createdDate}, "
+            + "   #{updateDDate} "
+            + " ) "
+    )
+    public long register(User user);
+
+    @Update(
+              " update "
+            + "   user "
+            + " set "
+            + "   user_email = #{userEmail}, "
+            + "   user_name = #{userName}, "
+            + "   password = #{password}, "
+            + "   user_status = #{user_status, typeHandler = User.UserStatusTypeHandler}, "
+            + "   updated_date = #{updatedDate} "
+    )
+    public long save(User user);
 }

@@ -1,5 +1,7 @@
 package com.github.tamurashingo.salonservice.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
 public class User implements java.io.Serializable, UserDetails {
 
     private Long userId;
@@ -80,7 +84,7 @@ public class User implements java.io.Serializable, UserDetails {
         }
     }
 
-    public class UserStatusHandler extends BaseTypeHandler<UserStatus> {
+    public class UserStatusTypeHandler extends BaseTypeHandler<UserStatus> {
 
         @Override
         public void setNonNullParameter(PreparedStatement ps, int i, UserStatus parameter, JdbcType jdbcType) throws SQLException {

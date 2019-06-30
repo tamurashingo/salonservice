@@ -24,10 +24,20 @@ dependencies {
 
   implementation 'org.springframework.boot:spring-boot-starter'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+  compileOnly 'org.projectlombok:lombok:1.18.8'
+  annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
 }
 
 flyway {
   url = 'jdbc:mysql://localhost:3306/salonservice'
+  user = 'root'
+  password = 'password'
+}
+
+task migrateTest(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+  url = 'jdbc:mysql://localhost:43306/salonservice'
   user = 'root'
   password = 'password'
 }
