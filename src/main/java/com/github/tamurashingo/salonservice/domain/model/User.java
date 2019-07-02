@@ -84,7 +84,7 @@ public class User implements java.io.Serializable, UserDetails {
         }
     }
 
-    public class UserStatusTypeHandler extends BaseTypeHandler<UserStatus> {
+    public static class UserStatusTypeHandler extends BaseTypeHandler<UserStatus> {
 
         @Override
         public void setNonNullParameter(PreparedStatement ps, int i, UserStatus parameter, JdbcType jdbcType) throws SQLException {
@@ -107,6 +107,8 @@ public class User implements java.io.Serializable, UserDetails {
         }
 
         private UserStatus typeChanger(String dbVal) {
+            System.out.println("dbval -> " + dbVal);
+
             return java.util.Arrays.stream(UserStatus.values())
                     .filter(v -> v.getUserStatus().equals(dbVal))
                     .findFirst()

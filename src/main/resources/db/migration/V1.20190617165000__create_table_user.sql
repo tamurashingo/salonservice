@@ -1,5 +1,5 @@
 create table user (
-  user_id INT NOT NULL PRIMARY KEY,
+  user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_email VARCHAR(255) NOT NULL,
   user_name VARCHAR(255),
   password VARCHAR(255),

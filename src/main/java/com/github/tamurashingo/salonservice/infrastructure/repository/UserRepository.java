@@ -25,6 +25,7 @@ package com.github.tamurashingo.salonservice.infrastructure.repository;
 
 import com.github.tamurashingo.salonservice.domain.model.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.DateTypeHandler;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -37,13 +38,13 @@ public interface UserRepository {
             + "   user_email, "
             + "   user_name, "
             + "   password, "
-            + "   user_status #{com., "
+            + "   user_status, "
             + "   created_date, "
             + "   updated_date "
             + " from "
             + "   user "
             + " where "
-            + "   email = #{email} "
+            + "   user_email = #{email} "
     )
     @Results( id = "User", value = {
             @Result(column = "user_id", property = "userId"),
@@ -51,8 +52,8 @@ public interface UserRepository {
             @Result(column = "user_name", property = "userName"),
             @Result(column = "password", property = "password"),
             @Result(column = "user_status", property = "userStatus", typeHandler = User.UserStatusTypeHandler.class),
-            @Result(column = "created_date", property = "createdDate"),
-            @Result(column = "updated_date", property = "updatedDate")
+            @Result(column = "created_date", property = "createdDate", typeHandler = DateTypeHandler.class),
+            @Result(column = "updated_date", property = "updatedDate", typeHandler = DateTypeHandler.class)
     })
     public User findUserByEmail(@Param("email") String email);
 
@@ -72,9 +73,9 @@ public interface UserRepository {
             + "   #{userEmail}, "
             + "   #{userName}, "
             + "   #{password}, "
-            + "   #{user_status, typeHandler = User.UserStatusTypeHandler}, "
+            + "   #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.User$UserStatusTypeHandler}, "
             + "   #{createdDate}, "
-            + "   #{updateDDate} "
+            + "   #{updatedDate} "
             + " ) "
     )
     public long register(User user);
@@ -86,7 +87,7 @@ public interface UserRepository {
             + "   user_email = #{userEmail}, "
             + "   user_name = #{userName}, "
             + "   password = #{password}, "
-            + "   user_status = #{user_status, typeHandler = User.UserStatusTypeHandler}, "
+            + "   user_status = #{user_status}," // typeHandler = com.github.tamurashingo.salonservice.domain.model.User.UserStatusTypeHandler}, "
             + "   updated_date = #{updatedDate} "
     )
     public long save(User user);
