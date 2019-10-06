@@ -1,0 +1,6 @@
+@startuml
+
+controller -> service: 呼び出し
+service ->
+
+@enduml

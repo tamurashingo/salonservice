@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://thymeleaf.org/thmeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div th:if="${param.logout}" class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <div class="notification is-danger">
+                        <button class="delete"></button>
+                        ログアウトしました
+                    </div>
+                </div>
+            </div>
+            <div th:if="${param.error}" class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <div class="notification is-danger">
+                        <button class="delete"></button>
+                        メールアドレスまたはパスワードが違います
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <form th:action="@{/login}" method="POST" class="box">
+                        <div class="field">
+                            <label for="" class="label">メールアドレス</label>
+                            <div class="control has-icons-left">
+                                <input type="email" name="username" placeholder="salonservice@salonservice.com" class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="" class="label">パスワード</label>
+                            <div class="control has-icons-left">
+                                <input type="password" name="password" placeholder="********" class="input" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="" class="checkbox">
+                                <input type="checkbox">
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="field">
+                            <button class="button is-success">
+                                ログイン
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

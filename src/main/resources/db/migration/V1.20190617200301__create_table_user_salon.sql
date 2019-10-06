@@ -1,5 +1,5 @@
 create table user_salon (
-  user_salon_id INT NOT NULL PRIMARY KEY,
+  user_salon_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
   salon_id INT NOT NULL,
   user_status VARCHAR(255) NOT NULL,

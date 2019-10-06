@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tamurashingo.salonservice.infrastructure.repository;
+package com.github.tamurashingo.salonservice.domain.repository;
 
 import com.github.tamurashingo.salonservice.domain.model.User;
 import org.apache.ibatis.annotations.*;
@@ -46,14 +46,14 @@ public interface UserRepository {
             + " where "
             + "   user_email = #{email} "
     )
-    @Results( id = "User", value = {
-            @Result(column = "user_id", property = "userId"),
-            @Result(column = "user_email", property = "userEmail"),
-            @Result(column = "user_name", property = "userName"),
-            @Result(column = "password", property = "password"),
-            @Result(column = "user_status", property = "userStatus", typeHandler = User.UserStatusTypeHandler.class),
-            @Result(column = "created_date", property = "createdDate", typeHandler = DateTypeHandler.class),
-            @Result(column = "updated_date", property = "updatedDate", typeHandler = DateTypeHandler.class)
+    @ConstructorArgs({
+            @Arg(id = true, column = "user_id", name = "userId"),
+            @Arg(column = "user_email", name = "userEmail"),
+            @Arg(column = "user_name", name = "userName"),
+            @Arg(column = "password", name = "password"),
+            @Arg(column = "user_status", name = "userStatus", typeHandler = User.UserStatusTypeHandler.class),
+            @Arg(column = "created_date", name = "createdDate", typeHandler = org.apache.ibatis.type.LocalDateTimeTypeHandler.class),
+            @Arg(column = "updated_date", name = "updatedDate", typeHandler = org.apache.ibatis.type.LocalDateTimeTypeHandler.class)
     })
     public User findUserByEmail(@Param("email") String email);
 
@@ -87,8 +87,9 @@ public interface UserRepository {
             + "   user_email = #{userEmail}, "
             + "   user_name = #{userName}, "
             + "   password = #{password}, "
-            + "   user_status = #{user_status}," // typeHandler = com.github.tamurashingo.salonservice.domain.model.User.UserStatusTypeHandler}, "
+            + "   user_status = #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.User$UserStatusTypeHandler}, "
             + "   updated_date = #{updatedDate} "
+            + " where user_id = #{userId}"
     )
     public long save(User user);
 }

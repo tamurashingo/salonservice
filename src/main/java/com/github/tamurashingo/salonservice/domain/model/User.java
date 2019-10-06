@@ -11,55 +11,34 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class User implements java.io.Serializable, UserDetails {
+public class User implements java.io.Serializable {
 
     private Long userId;
     private String userEmail;
     private String userName;
     private String password;
     private UserStatus userStatus;
-    private Date createdDate;
-    private Date updatedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
     public boolean isEnabled() {
         return this.userStatus == UserStatus.REGISTERED;
+    }
+
+    public User(String userEmail, String userName, String password, UserStatus userStatus, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.userId = 0L;
+        this.userEmail = userEmail;
+        this.userName = userName;
+        this.password = password;
+        this.userStatus = userStatus;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
 
 
@@ -107,8 +86,6 @@ public class User implements java.io.Serializable, UserDetails {
         }
 
         private UserStatus typeChanger(String dbVal) {
-            System.out.println("dbval -> " + dbVal);
-
             return java.util.Arrays.stream(UserStatus.values())
                     .filter(v -> v.getUserStatus().equals(dbVal))
                     .findFirst()

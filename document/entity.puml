@@ -1,0 +1,97 @@
+@startuml
+
+class user {
+  user_id
+  --
+  user_email
+  user_name
+  password
+  user_status
+  created_date
+  updated_date
+}
+
+
+class salon {
+  salon_id
+  --
+  salon_name
+  description
+  salon_status
+  created_by (user_id)
+  created_date
+  updated_date
+}
+
+class user_salon {
+  user_salon_id
+  --
+  user_id [FK]
+  salon_id [FK]
+  user_status
+  created_date
+  updated_date
+}
+
+class thread {
+  thread_id
+  --
+  salon_id [FK]
+  thread_status
+  created_by (user_id)
+  created_date
+  updated_date
+}
+
+class thread_comment {
+  thread_comment_id
+  --
+  thread_id
+  salon_id
+  user_id
+  comment
+  created_date
+  updated_date
+}
+
+class event {
+  event_id
+  --
+  salon_id [FK]
+  event_name
+  description
+  place
+  start_date
+  end_date
+  created_by (user_id)
+  created_date
+  updated_date
+}
+
+class attendee {
+  attendee_id
+  --
+  event_id [FK]
+  user_id [FK]
+  comment
+  attendance_status
+  created_date
+  updated_date
+}
+
+user --o{ salon
+user --o{ user_salon
+salon --{ user_salon
+salon --o{ thread
+user --o{ thread
+salon --o{ event
+user --o{ event
+event --o{ attendee
+user --o{ attendee
+
+thread --o{ thread_comment
+salon --o{ thread_comment
+user --o{ thread_comment
+
+
+@enduml
