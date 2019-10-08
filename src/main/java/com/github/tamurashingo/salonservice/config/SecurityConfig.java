@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // エラー時のURL
                 .failureUrl("/login?error")
                 // ログイン成功時のURL
-                .defaultSuccessUrl("/home", false)
+                .defaultSuccessUrl("/", false)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // ログアウト設定
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("signout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
