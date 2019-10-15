@@ -12,6 +12,29 @@
   <title>ログイン | Salon Service</title>
 </head>
 <body>
+<h1>ログイン</h1>
+<form th:action="@{/login}" method="POST">
+  <label for="username" />
+  <input type="email" id="inputLoginId" class="form-control" required>
+  </div>
+
+  <div class="login-loginpassword">
+    <label for="inputLoginPassword">パスワード</label>
+    <input type="password" id="inputLoginPassword" class="form-control" required>
+  </div>
+
+  <div class="login-loginsubmit">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
+  </div>
+
+  <hr>
+
+  <div class="">
+    <a href="#">パスワードをお忘れですか？</a>
+
+</form>
+
+
   <div class="container">
     <div class="row">
       <!--/* begin left */-->

@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 静的リソースに対するアクセスはセキュリティ設定を無視する

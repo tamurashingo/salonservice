@@ -59,4 +59,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = new User(username, username, password, User.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
     }
+
 }
