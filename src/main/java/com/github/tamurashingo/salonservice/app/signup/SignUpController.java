@@ -1,8 +1,6 @@
 package com.github.tamurashingo.salonservice.app.signup;
 
 import com.github.tamurashingo.salonservice.domain.model.userregister.UserRegisterModel;
-import com.github.tamurashingo.salonservice.domain.service.signup.SignUpService;
-import com.github.tamurashingo.salonservice.domain.service.signup.SignUpServiceException;
 import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterService;
 import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterServiceException;
 import org.springframework.stereotype.Controller;
