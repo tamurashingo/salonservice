@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 // ログイン成功時のURL
                 .defaultSuccessUrl("/", false)
-                .usernameParameter("username")
+                .usernameParameter("useremail")
                 .passwordParameter("password")
                 .permitAll()
                 .and()
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
