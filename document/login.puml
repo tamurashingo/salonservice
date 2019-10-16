@@ -1,0 +1,14 @@
+@startuml
+
+actor User
+
+User -> LoginView
+LoginView -> LoginController
+LoginController -> LoginService
+LoginService -> LoginRepository
+LoginRepository -> UserEntity
+
+
+
+
+@enduml

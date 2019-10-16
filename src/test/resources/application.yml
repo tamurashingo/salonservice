@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:43306/salonservice"
+    username: root
+    password: password
+logging:
+  level:
+    org:
+      springframework: WARN
+    com:
+      github:
+        tamurashingo: DEBUG

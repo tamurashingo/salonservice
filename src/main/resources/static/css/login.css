@@ -1,0 +1,44 @@
+.wrap {
+  height: 100%;
+  min-height: 100%;
+}
+
+.wrapper {
+  padding-top: 100px;
+}
+
+.main {
+  overflow: auto;
+  padding-bottom: 48px;
+  flex: 1
+}
+
+.content {
+  color: black;
+  margin: 0px, auto;
+  padding: 1em;
+  border-radius: 0.25em;
+  border: 1px solid rgb(128, 128, 128);
+}
+
+.login-form {
+  margin: 10px;
+}
+
+.login-loginid {
+  margin: 20px auto;
+}
+
+.login-loginpassword {
+  margin: 20px auto;
+}
+
+.login-loginsubmit {
+  margin: 10px auto;
+}
+
+footer {
+  position: relative;
+  margin-top: -24px;
+  height: 24px;
+}

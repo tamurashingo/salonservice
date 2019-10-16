@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>サロンサービス</title>
+</head>
+<body>
+<ul>
+    <li>
+        <a href="/login" sec:authorize="!isAuthenticated()">
+            Login
+        </a>
+    </li>
+    <li>
+        <a href="/sign_up" sec:authorize="!isAuthenticated()">
+            Sign up
+        </a>
+    </li>
+    <li>
+        <a href="/logout" sec:authorize="isAuthenticated()">
+            Logout
+        </a>
+    </li>
+</ul>
+
+
+<ul>
+    <li>サロン: </li>
+    <li>ユーザ: </li>
+    <li>スレッド: </li>
+    <li>イベント: </li>
+</ul>
+
+</body>
+</html>

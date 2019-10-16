@@ -1,0 +1,55 @@
+plugins {
+  id 'org.springframework.boot' version '2.1.5.RELEASE'
+  id 'java'
+  id 'org.flywaydb.flyway' version '5.2.4'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.tamurashingo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.5.RELEASE'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.5.RELEASE'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.5.RELEASE'
+  implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+
+  implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+  testImplementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter-test', version: '2.0.1'
+  
+  implementation group: 'org.mybatis', name: 'mybatis-typehandlers-jsr310', version: '1.0.2'
+
+  implementation 'org.springframework.boot:spring-boot-starter'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+  annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+
+}
+
+bootRun {
+  jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+}
+
+flyway {
+  url = 'jdbc:mysql://localhost:3306/salonservice'
+  user = 'root'
+  password = 'password'
+}
+
+task migrateTest(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+  url = 'jdbc:mysql://localhost:43306/salonservice'
+  user = 'root'
+  password = 'password'
+  //driver = 'com.mysql.cj.jdbc.Driver'
+
+}
+
+
