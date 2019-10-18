@@ -2,7 +2,7 @@ package com.github.tamurashingo.salonservice.app.signup;
 
 import com.github.tamurashingo.salonservice.domain.model.userregister.UserRegisterModel;
 import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterService;
-import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterServiceException;
+import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ public class SignUpController {
             UserRegisterModel model = convertSignUpModel(signUpForm);
             userRegisterService.register(model);
         }
-        catch (UserRegisterServiceException ex) {
+        catch (UserRegisterException ex) {
             System.out.println(ex);
         }
         mv.setViewName("signup/registered");

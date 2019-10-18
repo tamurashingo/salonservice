@@ -4,8 +4,8 @@ import com.github.tamurashingo.salonservice.domain.model.userregister.UserRegist
 
 public interface UserRegisterService {
 
-    boolean register(UserRegisterModel model) throws UserRegisterServiceException;
+    boolean register(UserRegisterModel model) throws UserRegisterException;
 
-    boolean authetication(String passphrase) throws UserRegisterServiceException;
+    boolean authetication(String passphrase) throws UserRegisterException;
 
 }
