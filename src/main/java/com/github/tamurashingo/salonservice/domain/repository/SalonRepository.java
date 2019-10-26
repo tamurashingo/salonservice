@@ -27,7 +27,7 @@ public interface SalonRepository {
             + " values ( "
             + "   #{salonName}, "
             + "   #{description}, "
-            + "   #{com.github.tamurashingo.salonservice.domain.model.SalonModel$SalonStatus.INVALID, typeHandler = com.github.tamurashingo.salonservice.domain.model.SalonModel$SalonStatusTypeHandler}, "
+            + "   #{com.github.tamurashingo.salonservice.domain.model.salon.SalonModel$SalonStatus.INVALID, typeHandler = com.github.tamurashingo.salonservice.domain.model.salon.SalonModel$SalonStatusTypeHandler}, "
             + "   #{java.time.LocalDateTime.now()}, "
             + "   #{java.time.LocalDateTime.now()} "
             + " } "

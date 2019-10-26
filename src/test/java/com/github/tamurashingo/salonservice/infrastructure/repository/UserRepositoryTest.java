@@ -7,9 +7,11 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
@@ -21,18 +23,22 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private NamedParameterJdbcOperations jdbcOperations;
-
-
     @Test
     @Transactional
     public void create() {
-        UserModel user =  new UserModel("test1@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
-        userRepository.register(user);
+        UserModel user = new UserModel("test1@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        long result = userRepository.register(user);
+
+        assertThat(result, is(1L));
+        assertThat(user.getUserId(), is(notNullValue()));
+
         UserModel user2 = userRepository.findUserByEmail("test1@email.com");
-        System.out.println(user2.getUserId());
-        System.out.println(user2.getUserName());
+
+        assertThat(user2, notNullValue());
+        assertThat(user2.getUserEmail(), is("test1@email.com"));
+        assertThat(user2.getUserName(), is("test name"));
+        assertThat(user2.getPassword(), is("password"));
+        assertThat(user2.getUserStatus(), is(UserModel.UserStatus.TEMPORARY));
     }
 
     @Test
@@ -40,12 +46,20 @@ public class UserRepositoryTest {
     public void update() {
         UserModel user = new UserModel("test2@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
+
+        assertThat(user.getUserId(), is(notNullValue()));
+
         user.setUserStatus(UserModel.UserStatus.REGISTERED);
 
-        userRepository.save(user);
+        long result = userRepository.save(user);
+
+        assertThat(result, is(1L));
 
         UserModel user2 = userRepository.findUserByEmail("test2@email.com");
-        System.out.println(user2.getUserId());
-        System.out.println(user2.getUserStatus());
+        assertThat(user2, notNullValue());
+        assertThat(user2.getUserEmail(), is("test2@email.com"));
+        assertThat(user2.getUserName(), is("test name"));
+        assertThat(user2.getPassword(), is("password"));
+        assertThat(user2.getUserStatus(), is(UserModel.UserStatus.REGISTERED));
     }
 }
