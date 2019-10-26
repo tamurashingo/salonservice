@@ -1,7 +1,7 @@
 package com.github.tamurashingo.salonservice.domain.service.impl;
 
-import com.github.tamurashingo.salonservice.domain.model.User;
 import com.github.tamurashingo.salonservice.domain.model.UserAccount;
+import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import com.github.tamurashingo.salonservice.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Username is empty");
         }
 
-        User user = userRepository.findUserByEmail(username);
+        UserModel user = userRepository.findUserByEmail(username);
         if (user == null) {
             System.out.println("User not found:" + username);
             throw new UsernameNotFoundException("User not found:" + username);
@@ -50,14 +50,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return account;
     }
 
-    private Collection<GrantedAuthority> getAuthorities(User user) {
+    private Collection<GrantedAuthority> getAuthorities(UserModel user) {
         return AuthorityUtils.createAuthorityList("ROLE_USER");
     }
 
     @Transactional
     public void registerUser(String useremail, String username, String password) {
         String encodedPassword = passwordEncoder.encode(password);
-        User user = new User(useremail, username, password, User.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = new UserModel(useremail, username, password, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
     }
 

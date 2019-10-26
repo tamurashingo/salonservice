@@ -1,6 +1,6 @@
 package com.github.tamurashingo.salonservice.domain.service.userregister.impl;
 
-import com.github.tamurashingo.salonservice.domain.model.User;
+import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import com.github.tamurashingo.salonservice.domain.model.userregister.UserRegisterModel;
 import com.github.tamurashingo.salonservice.domain.repository.UserRepository;
 import com.github.tamurashingo.salonservice.domain.service.userregister.UserRegisterService;
@@ -28,7 +28,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
     @Transactional
     public boolean register(UserRegisterModel model) throws UserRegisterException {
         String encodedPassword = passwordEncoder.encode(model.getPassword());
-        User user = new User(model.getUserEmail(), model.getUserName(), encodedPassword, User.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = new UserModel(model.getUserEmail(), model.getUserName(), encodedPassword, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
         return true;
     }

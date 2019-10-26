@@ -1,7 +1,7 @@
 package com.github.tamurashingo.salonservice.infrastructure.repository;
 
+import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import com.github.tamurashingo.salonservice.domain.repository.UserRepository;
-import com.github.tamurashingo.salonservice.domain.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -28,9 +28,9 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     public void create() {
-        User user =  new User("test1@email.com", "test name", "password", User.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user =  new UserModel("test1@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
-        User user2 = userRepository.findUserByEmail("test1@email.com");
+        UserModel user2 = userRepository.findUserByEmail("test1@email.com");
         System.out.println(user2.getUserId());
         System.out.println(user2.getUserName());
     }
@@ -38,13 +38,13 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     public void update() {
-        User user = new User("test2@email.com", "test name", "password", User.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = new UserModel("test2@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
         userRepository.register(user);
-        user.setUserStatus(User.UserStatus.REGISTERED);
+        user.setUserStatus(UserModel.UserStatus.REGISTERED);
 
         userRepository.save(user);
 
-        User user2 = userRepository.findUserByEmail("test2@email.com");
+        UserModel user2 = userRepository.findUserByEmail("test2@email.com");
         System.out.println(user2.getUserId());
         System.out.println(user2.getUserStatus());
     }

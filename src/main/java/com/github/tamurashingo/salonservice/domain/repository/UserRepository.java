@@ -23,7 +23,7 @@
  */
 package com.github.tamurashingo.salonservice.domain.repository;
 
-import com.github.tamurashingo.salonservice.domain.model.User;
+import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.DateTypeHandler;
 import org.springframework.stereotype.Repository;
@@ -51,11 +51,11 @@ public interface UserRepository {
             @Arg(column = "user_email", name = "userEmail"),
             @Arg(column = "user_name", name = "userName"),
             @Arg(column = "password", name = "password"),
-            @Arg(column = "user_status", name = "userStatus", typeHandler = User.UserStatusTypeHandler.class),
+            @Arg(column = "user_status", name = "userStatus", typeHandler = UserModel.UserStatusTypeHandler.class),
             @Arg(column = "created_date", name = "createdDate", typeHandler = org.apache.ibatis.type.LocalDateTimeTypeHandler.class),
             @Arg(column = "updated_date", name = "updatedDate", typeHandler = org.apache.ibatis.type.LocalDateTimeTypeHandler.class)
     })
-    public User findUserByEmail(@Param("email") String email);
+    public UserModel findUserByEmail(@Param("email") String email);
 
 
     @Insert(
@@ -73,12 +73,12 @@ public interface UserRepository {
             + "   #{userEmail}, "
             + "   #{userName}, "
             + "   #{password}, "
-            + "   #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.User$UserStatusTypeHandler}, "
+            + "   #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.UserModel$UserStatusTypeHandler}, "
             + "   #{createdDate}, "
             + "   #{updatedDate} "
             + " ) "
     )
-    public long register(User user);
+    public long register(UserModel user);
 
     @Update(
               " update "
@@ -87,9 +87,9 @@ public interface UserRepository {
             + "   user_email = #{userEmail}, "
             + "   user_name = #{userName}, "
             + "   password = #{password}, "
-            + "   user_status = #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.User$UserStatusTypeHandler}, "
+            + "   user_status = #{userStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.UserModel$UserStatusTypeHandler}, "
             + "   updated_date = #{updatedDate} "
             + " where user_id = #{userId}"
     )
-    public long save(User user);
+    public long save(UserModel user);
 }

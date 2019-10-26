@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class User implements java.io.Serializable {
+public class UserModel implements java.io.Serializable {
 
     private Long userId;
     private String userEmail;
@@ -31,7 +31,7 @@ public class User implements java.io.Serializable {
         return this.userStatus == UserStatus.REGISTERED;
     }
 
-    public User(String userEmail, String userName, String password, UserStatus userStatus, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public UserModel(String userEmail, String userName, String password, UserStatus userStatus, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.userId = 0L;
         this.userEmail = userEmail;
         this.userName = userName;

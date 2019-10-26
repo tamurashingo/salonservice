@@ -7,10 +7,10 @@ import java.util.Collection;
 
 public class UserAccount implements UserDetails {
 
-    private User user;
+    private UserModel user;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserAccount(User user, Collection<? extends GrantedAuthority> authorities) {
+    public UserAccount(UserModel user, Collection<? extends GrantedAuthority> authorities) {
         this.user = user;
         this.authorities = authorities;
     }
