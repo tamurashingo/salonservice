@@ -4,26 +4,26 @@ import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import com.github.tamurashingo.salonservice.domain.model.salon.SalonModel;
 import com.github.tamurashingo.salonservice.domain.repository.SalonRepository;
 import com.github.tamurashingo.salonservice.domain.repository.UserRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class SalonRepositoryTest {
 
     @Autowired
     private SalonRepository salonRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -36,9 +36,9 @@ public class SalonRepositoryTest {
         SalonModel salon = new SalonModel("test salon", "これはテスト用のサロンです", SalonModel.SalonStatus.INVALID, user, LocalDateTime.now(), LocalDateTime.now());
         long result = salonRepository.register(salon);
 
-        assertThat(result, is(1L));
-        assertThat(salon.getSalonId(), is(notNullValue()));
+        assertAll("登録したSalon",
+                () -> assertEquals(1L, result),
+                () -> assertNotNull(salon.getSalonId())
+        );
     }
-
-
 }
