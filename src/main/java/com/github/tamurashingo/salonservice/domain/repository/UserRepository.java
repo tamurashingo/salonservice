@@ -78,6 +78,7 @@ public interface UserRepository {
             + "   #{updatedDate} "
             + " ) "
     )
+    @SelectKey(statement = "select @@identity", keyProperty = "userId", before = false, resultType = Long.class)
     public long register(UserModel user);
 
     @Update(

@@ -2,12 +2,10 @@ package com.github.tamurashingo.salonservice.domain.repository;
 
 
 import com.github.tamurashingo.salonservice.domain.model.salon.SalonModel;
-import com.github.tamurashingo.salonservice.domain.model.salon.SalonRegisterModel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.SelectKey;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDateTime;
 
 @Repository
 @Mapper
@@ -27,10 +25,12 @@ public interface SalonRepository {
             + " values ( "
             + "   #{salonName}, "
             + "   #{description}, "
-            + "   #{com.github.tamurashingo.salonservice.domain.model.salon.SalonModel$SalonStatus.INVALID, typeHandler = com.github.tamurashingo.salonservice.domain.model.salon.SalonModel$SalonStatusTypeHandler}, "
-            + "   #{java.time.LocalDateTime.now()}, "
-            + "   #{java.time.LocalDateTime.now()} "
-            + " } "
+            + "   #{salonStatus, typeHandler = com.github.tamurashingo.salonservice.domain.model.salon.SalonModel$SalonStatusTypeHandler}, "
+            + "   #{user.userId}, "
+            + "   #{createdDate}, "
+            + "   #{updatedDate} "
+            + " ) "
     )
-    long register(SalonRegisterModel salon);
+    @SelectKey(statement = "select @@identity", keyProperty = "salonId", before = false, resultType = Long.class)
+    long register(SalonModel salon);
 }

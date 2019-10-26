@@ -11,6 +11,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +25,15 @@ public class SalonModel implements ValueObject<SalonModel> {
     private UserModel user;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+
+    public SalonModel(String salonName, String description, SalonStatus salonStatus, UserModel user, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.salonName = salonName;
+        this.description = description;
+        this.salonStatus = salonStatus;
+        this.user = user;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
 
     public static enum SalonStatus {
         /// 無効
