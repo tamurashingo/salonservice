@@ -28,7 +28,16 @@ public class UserRegisterServiceImpl implements UserRegisterService {
     @Transactional
     public boolean register(UserRegisterModel model) throws UserRegisterException {
         String encodedPassword = passwordEncoder.encode(model.getPassword());
-        UserModel user = new UserModel(model.getUserEmail(), model.getUserName(), encodedPassword, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        //UserModel user = new UserModel(model.getUserEmail(), model.getUserName(), encodedPassword, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = UserModel.builder()
+                .userEmail(model.getUserEmail())
+                .userName(model.getUserName())
+                .password(encodedPassword)
+                .userStatus(UserModel.UserStatus.TEMPORARY)
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
         userRepository.register(user);
         return true;
     }

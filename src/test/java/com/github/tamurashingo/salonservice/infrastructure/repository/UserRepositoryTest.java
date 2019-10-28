@@ -25,7 +25,16 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     public void create() {
-        UserModel user = new UserModel("test1@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        //UserModel user = new UserModel("test1@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = UserModel.builder()
+                .userEmail("test1@email.com")
+                .userName("test name")
+                .password("password")
+                .userStatus(UserModel.UserStatus.TEMPORARY)
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
         long result = userRepository.register(user);
         assertAll("登録したUser",
                 () -> assertEquals(1L, result),
@@ -47,7 +56,16 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     public void update() {
-        UserModel user = new UserModel("test2@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        //UserModel user = new UserModel("test2@email.com", "test name", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = UserModel.builder()
+                .userEmail("test2@email.com")
+                .userName("test name")
+                .password("password")
+                .userStatus(UserModel.UserStatus.TEMPORARY)
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
         userRepository.register(user);
         assertNotNull(user.getUserId());
 

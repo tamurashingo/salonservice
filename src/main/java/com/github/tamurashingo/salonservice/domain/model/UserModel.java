@@ -18,6 +18,7 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class UserModel implements java.io.Serializable {
 
     private Long userId;
@@ -31,17 +32,6 @@ public class UserModel implements java.io.Serializable {
     public boolean isEnabled() {
         return this.userStatus == UserStatus.REGISTERED;
     }
-
-    public UserModel(String userEmail, String userName, String password, UserStatus userStatus, LocalDateTime createdDate, LocalDateTime updatedDate) {
-        this.userId = 0L;
-        this.userEmail = userEmail;
-        this.userName = userName;
-        this.password = password;
-        this.userStatus = userStatus;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-    }
-
 
     /**
      * ユーザステータス

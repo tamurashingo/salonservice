@@ -30,7 +30,16 @@ public class SalonRepositoryTest {
     @Test
     @Transactional
     public void registerSalon() {
-        UserModel user = new UserModel("salon_register1@email.com", "salon register", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        //UserModel user = new UserModel("salon_register1@email.com", "salon register", "password", UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = UserModel.builder()
+                .userEmail("salon_register1@email.com")
+                .userName("salon register")
+                .password("password")
+                .userStatus(UserModel.UserStatus.TEMPORARY)
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
         userRepository.register(user);
 
         SalonModel salon = new SalonModel("test salon", "これはテスト用のサロンです", SalonModel.SalonStatus.INVALID, user, LocalDateTime.now(), LocalDateTime.now());

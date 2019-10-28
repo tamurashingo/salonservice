@@ -25,7 +25,6 @@ package com.github.tamurashingo.salonservice.domain.repository;
 
 import com.github.tamurashingo.salonservice.domain.model.UserModel;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.DateTypeHandler;
 import org.springframework.stereotype.Repository;
 
 @Repository

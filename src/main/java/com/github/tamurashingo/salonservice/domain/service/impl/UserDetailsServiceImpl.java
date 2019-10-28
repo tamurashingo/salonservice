@@ -57,7 +57,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public void registerUser(String useremail, String username, String password) {
         String encodedPassword = passwordEncoder.encode(password);
-        UserModel user = new UserModel(useremail, username, password, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        //UserModel user = new UserModel(useremail, username, password, UserModel.UserStatus.TEMPORARY, LocalDateTime.now(), LocalDateTime.now());
+        UserModel user = UserModel.builder()
+                .userEmail(useremail)
+                .userName(username)
+                .password(password)
+                .userStatus(UserModel.UserStatus.TEMPORARY)
+                .createdDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .build();
+
         userRepository.register(user);
     }
 
